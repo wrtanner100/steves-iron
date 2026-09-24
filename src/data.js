@@ -30,65 +30,65 @@ const services = [
     id: 'gates',
     title: 'Gates',
     icon: 'gate',
-    photo: 'service-gates.jpg',
     text: 'Iron gate repair and new custom swing gates. Gate hinge weld repairs, sagging gates corrected, and latches and locks that work again.',
   },
   {
     id: 'fences',
     title: 'Fences',
     icon: 'fence',
-    photo: 'service-fences.jpg',
     text: 'Broken wrought iron fences fixed and bent fencing straightened. We also install galvanized and powder coated standard fence panels and gates.',
   },
   {
     id: 'railings',
     title: 'Railings',
     icon: 'rail',
-    photo: 'service-railings.jpg',
     text: 'New custom hand rails, scrollwork railings, and welding and repair of existing railings and handrails on stairs, porches and balconies.',
   },
   {
     id: 'restoration',
     title: 'Restoration',
     icon: 'spark',
-    photo: 'service-restoration.jpg',
     text: 'Wrought iron restoration for homes and businesses. Rusted gates and fences restored, rusted-out posts replaced, rust repaired and recoated.',
   },
   {
     id: 'mobile-welding',
     title: 'Mobile Welding',
     icon: 'truck',
-    photo: 'service-mobile.jpg',
     text: 'We come to your home, business, garage, dock or roadside location and bring everything, including a generator to power our electric welders. Trailers, security bars, brackets, tools, grates, frames and more.',
   },
 ];
 
-// "Our Previous Works" cards. Swap titles to match the photos you drop in.
-const works = [
-  { title: 'Custom Swing Gates', photo: 'work-1.jpg' },
-  { title: 'Scroll Railings', photo: 'work-2.jpg' },
-  { title: 'Fence Restoration', photo: 'work-3.jpg' },
+// Job photos (assets/img/gallery/). Captions come from Steve's own gallery.
+// `type` drives the filter buttons on the Gallery page.
+const gallery = [
+  { file: 'job-01.jpg', caption: 'Horizontal linear design slat gate', type: 'Gates' },
+  { file: 'job-02.jpg', caption: 'Horizontal linear design slat fence panels', city: 'San Clemente', type: 'Fences' },
+  { file: 'job-03.jpg', caption: 'Horizontal linear design slat fence panels', city: 'San Clemente', type: 'Fences' },
+  { file: 'job-04.jpg', caption: 'Handrail with custom mounting brackets going up brick steps', city: 'Dana Point', type: 'Handrails' },
+  { file: 'job-05.jpg', caption: 'Wrought iron side yard gate', type: 'Gates' },
+  { file: 'job-06.jpg', caption: 'Black entry step handrail', type: 'Handrails' },
+  { file: 'job-07.jpg', caption: 'Black iron patio railing', type: 'Fences' },
+  { file: 'job-08.jpg', caption: 'Modern black handrail', city: 'Dana Point', type: 'Handrails' },
+  { file: 'job-09.jpg', caption: 'Standard property fence', city: 'Dana Point', type: 'Fences' },
+  { file: 'job-10.jpg', caption: 'Sleek slat design gate', city: 'Dana Point', type: 'Gates' },
+  { file: 'job-11.jpg', caption: 'Spiral handrails going up', city: 'San Clemente', type: 'Handrails' },
+  { file: 'job-12.jpg', caption: 'Spiral handrails going down', city: 'San Clemente', type: 'Handrails' },
 ];
 
-// Customer reviews shown on every page.
-// These are real excerpts from Steve's public reviews. When you have Steve's Google reviews in front of you,
-// replace them with his 3–4 best, word for word, with the reviewer's name as it appears on Google.
+// Hero panels (paired with the tagline) and "Our Previous Works" cards.
+const heroPhotos = ['gallery/job-11.jpg', 'gallery/job-10.jpg', 'gallery/job-02.jpg'];
+const works = [
+  { title: 'Custom Slat Gates', photo: 'gallery/job-10.jpg' },
+  { title: 'Custom Handrails', photo: 'gallery/job-04.jpg' },
+  { title: 'Fences & Panels', photo: 'gallery/job-09.jpg' },
+];
+const aboutPhoto = 'gallery/job-05.jpg';
+
+// Google reviews shown on every page.
 const reviews = [
-  {
-    quote: 'Steve came out to fix an iron gate that would no longer lock and did a great job. A week later, due to a weather change, the gate wouldn’t latch, and Steve came right out to fix it without another charge. I would definitely recommend this company for their work and integrity.',
-    name: 'Homeowner',
-    job: 'Iron gate repair',
-  },
-  {
-    quote: 'He promptly called me back, gave a quote, and less than 4 hours later had all 3 sections repaired and primed!',
-    name: 'Homeowner',
-    job: 'Fence repair',
-  },
-  {
-    quote: 'Steve did a great job replacing a few rusted out posts and some rust repair on our wrought iron gates.',
-    name: 'Homeowner',
-    job: 'Gate restoration',
-  },
+  { quote: 'Extremely pleased with Steve’s work. I highly recommend him and his team.', name: 'Charles' },
+  { quote: 'Steve was easy to work with and great with communication.', name: 'Nicholas' },
+  { quote: 'Steve was great, he was prompt, polite and we now have a beautiful wrought iron gate!', name: 'Karen' },
 ];
 const reviewCount = '100+';
 
@@ -96,6 +96,7 @@ const reviewCount = '100+';
 const cities = [
   {
     slug: 'dana-point',
+    photo: 'gallery/job-08.jpg',
     name: 'Dana Point',
     featured: true,
     intro: 'Dana Point is right next door to our San Clemente shop, and it’s where we do a lot of our favorite work. From bluff-top homes in Monarch Beach to cottages in Capistrano Beach and the shops in the Lantern District, Steve keeps iron gates, fences and railings working and looking sharp.',
@@ -108,6 +109,7 @@ const cities = [
   },
   {
     slug: 'san-clemente',
+    photo: 'gallery/job-11.jpg',
     name: 'San Clemente',
     intro: 'San Clemente is home. Our shop is at 905 Calle Gomero, so we’re close to every neighborhood in town, from the Pier Bowl to Talega and Forster Ranch. Need it fast? We can usually get out quickly, and you can always bring smaller jobs to the shop.',
     focus: [
@@ -196,4 +198,4 @@ const cities = [
   },
 ];
 
-module.exports = { business, services, works, reviews, reviewCount, cities };
+module.exports = { business, services, gallery, heroPhotos, works, aboutPhoto, reviews, reviewCount, cities };

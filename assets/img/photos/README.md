@@ -1,20 +1,16 @@
-# Steve's photos
+# Extra photos (optional)
 
-Drop JPGs here with these exact names. Any that are missing show a black wrought-iron pattern, so the site never shows a broken image. After adding photos, there's no rebuild needed. Just commit them.
+Steve's job photos live in `assets/img/gallery/` and are listed, with captions, in `gallery` in `src/data.js`.
 
-Aim for about 1600px wide, compressed under 300 KB (squoosh.app works well).
+To add a new job photo:
+1. Save it as `assets/img/gallery/job-13.jpg` (and so on). A square-ish crop about 900px wide works best.
+2. Add a line to `gallery` in `src/data.js` with a caption, city and type (Gates, Fences or Handrails).
+3. Run `node build.js`.
 
-| File | Where it shows | Best shot |
-| --- | --- | --- |
-| `hero-quality.jpg` | Hero panel 1, "QUALITY." | The black swirl/scroll railing from his current site |
-| `hero-commitment.jpg` | Hero panel 2, "COMMITMENT." | A finished custom gate |
-| `hero-integration.jpg` | Hero panel 3, "INTEGRATION." | Steve welding on site, sparks |
-| `work-1.jpg` | Previous Works: Custom Swing Gates | Best gate job |
-| `work-2.jpg` | Previous Works: Scroll Railings | Best railing job |
-| `work-3.jpg` | Previous Works: Fence Restoration | Before/after restoration |
-| `steve.jpg` | "Why Steve's Iron" section | Steve with the truck/rig (portrait orientation) |
-| `city-dana-point.jpg` … `city-newport-beach.jpg` | Background of each city page | A job in that city (optional) |
+## City page backgrounds
 
-City photo names: `city-dana-point`, `city-san-clemente`, `city-san-juan-capistrano`, `city-laguna-niguel`, `city-laguna-beach`, `city-mission-viejo`, `city-laguna-hills`, `city-irvine`, `city-newport-beach`.
+Dana Point and San Clemente already use gallery photos. The other city pages show a black wrought-iron pattern until a photo is dropped in here:
 
-Where to get them: the Gallery on stevesiron.com, his Instagram and his Houzz page.
+`city-san-juan-capistrano.jpg`, `city-laguna-niguel.jpg`, `city-laguna-beach.jpg`, `city-mission-viejo.jpg`, `city-laguna-hills.jpg`, `city-irvine.jpg`, `city-newport-beach.jpg`
+
+No rebuild is needed for these. Or point a city at a gallery photo with `photo: 'gallery/job-XX.jpg'` in `src/data.js`.

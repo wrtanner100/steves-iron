@@ -41,6 +41,57 @@
     img.src = el.dataset.img;
   });
 
+  /* ---------- Gallery: filters + lightbox ---------- */
+  const items = $$('.g-item');
+  if (items.length) {
+    const filters = $$('.filter');
+    filters.forEach((btn) => btn.addEventListener('click', () => {
+      filters.forEach((f) => { f.classList.toggle('active', f === btn); f.setAttribute('aria-pressed', String(f === btn)); });
+      items.forEach((it) => { it.hidden = btn.dataset.filter !== 'All' && it.dataset.type !== btn.dataset.filter; });
+    }));
+
+    const lb = document.createElement('div');
+    lb.className = 'lightbox';
+    lb.setAttribute('role', 'dialog');
+    lb.setAttribute('aria-modal', 'true');
+    lb.setAttribute('aria-label', 'Photo viewer');
+    lb.innerHTML = '<button type="button" class="lb-close" aria-label="Close">&times;</button>'
+      + '<button type="button" class="lb-nav lb-prev" aria-label="Previous photo">&#8592;</button>'
+      + '<figure><img alt="" /><figcaption></figcaption></figure>'
+      + '<button type="button" class="lb-nav lb-next" aria-label="Next photo">&#8594;</button>';
+    document.body.appendChild(lb);
+    const lbImg = $('img', lb);
+    const lbCap = $('figcaption', lb);
+    let current = 0;
+    let opener = null;
+    const visible = () => items.filter((it) => !it.hidden);
+    const show = (i) => {
+      const list = visible();
+      current = (i + list.length) % list.length;
+      const img = $('img', list[current]);
+      lbImg.src = img.src;
+      lbImg.alt = img.alt;
+      lbCap.textContent = img.alt;
+    };
+    const close = () => { lb.classList.remove('open'); if (opener) opener.focus(); };
+    items.forEach((it) => $('.g-open', it).addEventListener('click', (e) => {
+      opener = e.currentTarget;
+      show(visible().indexOf(it));
+      lb.classList.add('open');
+      $('.lb-close', lb).focus();
+    }));
+    $('.lb-close', lb).addEventListener('click', close);
+    $('.lb-prev', lb).addEventListener('click', () => show(current - 1));
+    $('.lb-next', lb).addEventListener('click', () => show(current + 1));
+    lb.addEventListener('click', (e) => { if (e.target === lb) close(); });
+    document.addEventListener('keydown', (e) => {
+      if (!lb.classList.contains('open')) return;
+      if (e.key === 'Escape') close();
+      if (e.key === 'ArrowLeft') show(current - 1);
+      if (e.key === 'ArrowRight') show(current + 1);
+    });
+  }
+
   /* ---------- Quote form: validates, then opens an email to Steve ---------- */
   const form = $('#quote-form');
   if (form) {
@@ -80,7 +131,7 @@
 
   /* ---------- Reveal on scroll ---------- */
   if (!reduceMotion && 'IntersectionObserver' in window) {
-    const targets = $$('.section-head, .service, .work-card, .review, .area-card, .focus, .stat, .checks li');
+    const targets = $$('.section-head, .service, .work-card, .g-item, .review, .area-card, .focus, .stat, .checks li');
     targets.forEach((el) => el.classList.add('reveal'));
     const io = new IntersectionObserver((entries) => {
       entries.forEach((entry) => {

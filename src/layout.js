@@ -18,11 +18,11 @@ const icons = {
   facebook: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 8h3V4h-3a4 4 0 0 0-4 4v2H7v4h3v8h4v-8h3l1-4h-4V8z" fill="currentColor" stroke="none"/></svg>',
 };
 
-// Scroll-work mark: nods to Steve's wrought iron work. Black & white, like his current logo.
+// Steve's gate logo, recolored white on a transparent background for the dark site.
+// logo-black.png is the same logo for light backgrounds.
 const logo = (root) => `
 <a href="${root}" class="logo" aria-label="${esc(b.name)} home">
-  <svg class="logo-mark" viewBox="0 0 40 40" aria-hidden="true"><rect x="1.5" y="1.5" width="37" height="37" rx="3"/><path d="M20 8c-7 0-8 9-2 10 4 .6 4.5-4 1-4M20 8c7 0 8 9 2 10M20 18v14M12 32h16"/></svg>
-  <span class="logo-text"><strong>STEVE’S IRON</strong><small>Wrought Iron &amp; Mobile Welding</small></span>
+  <img src="${root}assets/img/logo-white.png" alt="${esc(b.name)}" width="768" height="471" />
 </a>`;
 
 const houzzBadge = `
@@ -44,7 +44,7 @@ const head = ({ root, title, description, path, jsonLd }) => `<!DOCTYPE html>
   <meta property="og:title" content="${esc(title)}" />
   <meta property="og:description" content="${esc(description)}" />
   <meta property="og:url" content="${b.site}${path}" />
-  <meta property="og:image" content="${b.site}/assets/img/photos/hero-quality.jpg" />
+  <meta property="og:image" content="${b.site}/assets/img/gallery/job-10.jpg" />
   <link rel="preload" href="${root}assets/fonts/plus-jakarta-sans-400.woff2" as="font" type="font/woff2" crossorigin />
   <link rel="stylesheet" href="${root}assets/css/fonts.css" />
   <link rel="stylesheet" href="${root}assets/css/styles.css" />
@@ -78,15 +78,15 @@ const header = ({ root, home }) => {
       <nav class="nav" aria-label="Main">
         <ul class="nav-menu" id="nav-menu">
           <li><a href="${h}#services">Services</a></li>
-          <li><a href="${h}#work">Our Work</a></li>
-          <li><a href="${h}#reviews">Reviews</a></li>
+                    <li><a href="${h}#reviews">Reviews</a></li>
+          <li><a href="${root}gallery/">Gallery</a></li>
           <li><a href="${root}service-areas/">Service Areas</a></li>
           <li><a href="${h}#contact">Contact</a></li>
         </ul>
       </nav>
       <div class="header-cta">
-        <a href="${b.phoneHref}" class="btn btn-yellow btn-call" aria-label="Call ${b.phone}">${icons.phone}<span class="call-label">Call Now</span><span class="call-number">${b.phone}</span></a>
-        <a href="${h}#quote" class="btn btn-red">Free Quote</a>
+        <a href="${b.phoneHref}" class="btn btn-red btn-call" aria-label="Call ${b.phone}">${icons.phone}<span class="call-label">Call Now</span><span class="call-number">${b.phone}</span></a>
+        <a href="${h}#quote" class="btn btn-light">Free Quote</a>
         <button class="nav-toggle" aria-expanded="false" aria-controls="nav-menu" aria-label="Open menu"><span></span><span></span><span></span></button>
       </div>
     </div>
@@ -95,7 +95,7 @@ const header = ({ root, home }) => {
 };
 
 const slot = (file, cls = '', label = '') =>
-  `<div class="photo ${cls}" data-img="{{root}}assets/img/photos/${file}"${label ? ` role="img" aria-label="${esc(label)}"` : ''}></div>`;
+  `<div class="photo ${cls}" data-img="{{root}}assets/img/${file}"${label ? ` role="img" aria-label="${esc(label)}"` : ''}></div>`;
 
 const noJobBand = () => {
   const items = ['No job too small', '24/7 emergency service', `Licensed ${b.license}`, 'Free quotes', 'We come to you'];
@@ -118,7 +118,7 @@ const serviceBoxes = (city) => `
     <article class="service service-cta">
       <h3>Not sure what you need?</h3>
       <p>Send a photo or give Steve a call. Free quotes, no job too small.</p>
-      <a href="${b.phoneHref}" class="btn btn-yellow">${icons.phone} ${b.phone}</a>
+      <a href="${b.phoneHref}" class="btn btn-black">${icons.phone} ${b.phone}</a>
     </article>
   </div>`;
 
@@ -141,7 +141,7 @@ const reviewsSection = () => `
           <blockquote>“${esc(r.quote)}”</blockquote>
           <figcaption>
             <span class="avatar" aria-hidden="true">${esc(r.name[0])}</span>
-            <span><strong>${esc(r.name)}</strong><small>${esc(r.job)}</small></span>
+            <span><strong>${esc(r.name)}</strong><small>Google review</small></span>
           </figcaption>
         </figure>`).join('')}
       </div>
@@ -242,8 +242,8 @@ const footer = ({ root }) => `
     </div>
   </footer>
   <div class="mobile-bar">
-    <a href="${b.phoneHref}" class="btn btn-yellow">${icons.phone} Call Now</a>
-    <a href="#quote" class="btn btn-red">Free Quote</a>
+    <a href="${b.phoneHref}" class="btn btn-red">${icons.phone} Call Now</a>
+    <a href="#quote" class="btn btn-light">Free Quote</a>
   </div>
   <script src="${root}assets/js/main.js" defer></script>
 </body>

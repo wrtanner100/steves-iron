@@ -1,7 +1,7 @@
 // Builds the static site from src/. Run: node build.js
 const fs = require('fs');
 const path = require('path');
-const { business: b, works, cities } = require('./src/data');
+const { business: b, gallery, heroPhotos, works, aboutPhoto, cities } = require('./src/data');
 const L = require('./src/layout');
 
 const write = (rel, html) => {
@@ -17,9 +17,9 @@ const page = ({ root, path: p, title, description, jsonLd, home = false, body })
 
 /* ------------------------------ Home ------------------------------ */
 const heroPanels = [
-  { word: b.tagline[0], photo: 'hero-quality.jpg', alt: 'Wrought iron scroll railing by Steve’s Iron' },
-  { word: b.tagline[1], photo: 'hero-commitment.jpg', alt: 'Custom iron gate by Steve’s Iron' },
-  { word: b.tagline[2], photo: 'hero-integration.jpg', alt: 'Steve welding on site' },
+  { word: b.tagline[0], photo: heroPhotos[0], alt: 'Spiral handrail by Steve’s Iron, San Clemente' },
+  { word: b.tagline[1], photo: heroPhotos[1], alt: 'Sleek slat design gate by Steve’s Iron, Dana Point' },
+  { word: b.tagline[2], photo: heroPhotos[2], alt: 'Horizontal slat fence panels by Steve’s Iron, San Clemente' },
 ];
 
 const home = `
@@ -29,15 +29,15 @@ const home = `
       </div>
       <div class="container hero-copy">
         <div class="hero-badges">
-          <span class="pill pill-yellow">Licensed ${b.license}</span>
+          <span class="pill pill-red">Licensed ${b.license}</span>
           <span class="pill">Best of Houzz</span>
           <span class="pill">${b.years} Years</span>
         </div>
         <h1>Custom Wrought Iron &amp; Mobile Welding in Dana Point &amp; South OC</h1>
         <p class="hero-lead">Steve’s Iron repairs iron gates and fences and specializes in mobile welding and wrought iron restoration of residential and commercial swing gates and fences. We come to you, 24/7.</p>
         <div class="hero-actions">
-          <a href="${b.phoneHref}" class="btn btn-yellow btn-xl">${L.icons.phone} Call ${b.phone}</a>
-          <a href="#quote" class="btn btn-red btn-xl">Get a Free Quote</a>
+          <a href="${b.phoneHref}" class="btn btn-red btn-xl">${L.icons.phone} Call ${b.phone}</a>
+          <a href="#quote" class="btn btn-light btn-xl">Get a Free Quote</a>
         </div>
         <div class="stats">
           <div class="stat"><strong>${b.years}</strong><span>Years in business</span></div>
@@ -71,7 +71,7 @@ const home = `
             ${L.slot(w.photo, '', w.title)}
             <div class="work-body">
               <h3>${w.title.replace(' ', '<br />')}</h3>
-              ${i === works.length - 1 ? `<a href="${b.houzzUrl}" target="_blank" rel="noopener" class="pill-link">View Projects</a>` : ''}
+              ${i === works.length - 1 ? `<a href="gallery/" class="pill-link">View Projects</a>` : ''}
             </div>
           </article>`).join('')}
         </div>
@@ -81,7 +81,7 @@ const home = `
     <section class="section about" id="about">
       <div class="container about-grid">
         <div class="about-photo">
-          ${L.slot('steve.jpg', '', 'Steve of Steve’s Iron')}
+          ${L.slot(aboutPhoto, '', 'Wrought iron side yard gate by Steve’s Iron')}
           ${L.houzzBadge}
         </div>
         <div>
@@ -131,6 +131,47 @@ write('index.html', page({
   body: home,
 }));
 
+
+/* ------------------------------ Gallery ------------------------------ */
+const types = ['All', ...new Set(gallery.map((g) => g.type))];
+const galleryBody = `
+    <section class="page-hero">
+      <div class="container">
+        <p class="eyebrow">Gallery</p>
+        <h1>Recent gates, fences &amp; handrails</h1>
+        <p class="hero-lead">Real jobs by Steve’s Iron around Dana Point, San Clemente and South OC. Tap any photo to see it bigger.</p>
+      </div>
+    </section>
+    <section class="section gallery-section">
+      <div class="container">
+        <div class="filters" role="group" aria-label="Filter photos">
+          ${types.map((t, i) => `<button type="button" class="filter${i === 0 ? ' active' : ''}" data-filter="${t}" aria-pressed="${i === 0}">${t}</button>`).join('')}
+        </div>
+        <div class="gallery-grid">
+          ${gallery.map((g) => `
+          <figure class="g-item" data-type="${g.type}">
+            <button type="button" class="g-open" aria-label="View larger: ${L.esc(g.caption)}${g.city ? `, ${g.city}` : ''}">
+              <img src="../assets/img/gallery/${g.file}" alt="${L.esc(g.caption)}${g.city ? `, ${g.city}` : ''}" loading="lazy" width="442" height="403" />
+            </button>
+            <figcaption>${L.esc(g.caption)}${g.city ? `<span>${g.city}</span>` : ''}</figcaption>
+          </figure>`).join('')}
+        </div>
+        <p class="muted center">More of Steve’s work on <a href="${b.houzzUrl}" target="_blank" rel="noopener">Houzz</a> and <a href="${b.facebookUrl}" target="_blank" rel="noopener">Facebook</a>.</p>
+      </div>
+    </section>
+    ${L.reviewsSection()}
+    ${L.ctaBand()}
+    ${L.contactSection()}
+`;
+write('gallery/index.html', page({
+  root: '../',
+  path: '/gallery/',
+  title: 'Gallery | Steve’s Iron: Gates, Fences & Handrails in South OC',
+  description: 'Photos of custom slat gates, fence panels, property fences and handrails built by Steve’s Iron in Dana Point, San Clemente and South Orange County.',
+  jsonLd: L.localBusiness(),
+  body: galleryBody,
+}));
+
 /* -------------------------- Service areas index -------------------------- */
 const areasIndex = `
     <section class="page-hero">
@@ -170,18 +211,18 @@ cities.forEach((c) => {
   const others = cities.filter((o) => o.slug !== c.slug);
   const body = `
     <section class="page-hero city-hero">
-      ${L.slot(`city-${c.slug}.jpg`, 'city-photo', `Iron work in ${c.name}`)}
+      ${L.slot(c.photo || `photos/city-${c.slug}.jpg`, 'city-photo', `Iron work in ${c.name}`)}
       <div class="container">
         <nav class="crumbs" aria-label="Breadcrumb"><a href="../../">Home</a> / <a href="../">Service Areas</a> / <span>${c.name}</span></nav>
         <div class="hero-badges">
-          <span class="pill pill-yellow">Licensed ${b.license}</span>
+          <span class="pill pill-red">Licensed ${b.license}</span>
           <span class="pill">24/7 Emergency</span>
         </div>
         <h1>Wrought Iron &amp; Mobile Welding in ${c.name}</h1>
         <p class="hero-lead">${L.esc(c.intro)}</p>
         <div class="hero-actions">
-          <a href="${b.phoneHref}" class="btn btn-yellow btn-xl">${L.icons.phone} Call ${b.phone}</a>
-          <a href="#quote" class="btn btn-red btn-xl">Get a Free Quote</a>
+          <a href="${b.phoneHref}" class="btn btn-red btn-xl">${L.icons.phone} Call ${b.phone}</a>
+          <a href="#quote" class="btn btn-light btn-xl">Get a Free Quote</a>
         </div>
       </div>
     </section>
@@ -247,7 +288,7 @@ cities.forEach((c) => {
 });
 
 /* ------------------------------ Sitemap ------------------------------ */
-const urls = ['/', '/service-areas/', ...cities.map((c) => `/service-areas/${c.slug}/`)];
+const urls = ['/', '/gallery/', '/service-areas/', ...cities.map((c) => `/service-areas/${c.slug}/`)];
 write('sitemap.xml', `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 ${urls.map((u) => `  <url><loc>${b.site}${u}</loc></url>`).join('\n')}

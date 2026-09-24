@@ -6,8 +6,9 @@ It's a fast static site (HTML, CSS and a little JS). There are no dependencies, 
 
 ## Brand
 
-- **Colors:** black, white, red `#F65257` and yellow `#FBDE44`
-- **Fonts:** Plus Jakarta Sans for headings and body, Bebas Neue for the yellow "No job too small" accents. Both are self-hosted in `assets/fonts/`.
+- **Colors:** black, white and red `#F65257`
+- **Logo:** Steve's gate logo, recolored as `assets/img/logo-white.png` (for dark backgrounds) and `logo-black.png` (for light ones). It's cleaned up from his current small JPG.
+- **Fonts:** Plus Jakarta Sans for headings and body, Bebas Neue for the red "No job too small" accents. Both are self-hosted in `assets/fonts/`.
 - **Tagline:** Quality. Commitment. Integration.
 - **Trust markers:** CA License #968768 C-23, Best of Houzz, 25+ years, 24/7 emergency, (949) 456-0176 on every page
 
@@ -16,6 +17,7 @@ It's a fast static site (HTML, CSS and a little JS). There are no dependencies, 
 | URL | What it is |
 | --- | --- |
 | `/` | Homepage: hero, services, previous works, about, reviews, service areas, quote form |
+| `/gallery/` | Photo gallery of Steve's jobs, with filters (Gates / Fences / Handrails) and a lightbox |
 | `/service-areas/` | All cities |
 | `/service-areas/dana-point/` | Dana Point page (featured first) |
 | `/service-areas/<city>/` | San Clemente, San Juan Capistrano, Laguna Niguel, Laguna Beach, Mission Viejo, Laguna Hills, Irvine, Newport Beach |
@@ -24,7 +26,7 @@ Each city page has its own title, description, local copy and `Service` structur
 
 ## Editing content
 
-All text lives in **`src/data.js`**: business info, services, reviews and city pages. Page templates are in `src/layout.js` and `build.js`.
+All text lives in **`src/data.js`**: business info, services, gallery photos and captions, reviews and city pages. Page templates are in `src/layout.js` and `build.js`.
 
 After editing, rebuild the HTML:
 
@@ -34,14 +36,12 @@ node build.js
 
 This needs Node 18+ and nothing else. Commit the generated `.html` files too, since those are what gets hosted.
 
-## Before showing Steve / launch checklist
+## Still to do
 
-- [ ] **Photos:** drop his real job photos into `assets/img/photos/` (see the [photo guide](assets/img/photos/README.md)). Get them from his site's Gallery, Instagram and Houzz.
-- [ ] **Reviews:** pick his 3–4 best Google reviews and paste them word for word into `reviews` in `src/data.js`, with names. The current three are real excerpts from his public reviews, but they don't include reviewer names.
-- [ ] **Logo:** ask Steve for the original logo file. The site uses a simple black-and-white text mark until then.
+- [ ] **Logo:** ask Steve for the original logo file. The current one is upscaled from the small JPG on his site. Replace `logo-white.png` and `logo-black.png`.
 - [ ] **Best of Houzz badge:** swap the CSS badge for the official badge image from his Houzz pro account.
 - [ ] **Instagram:** add his handle as `instagramUrl` in `src/data.js`.
-- [ ] **Hours:** confirm them. His site says Mon–Sat 9–5, and some listings say Mon–Fri 8–5.
+- [ ] **More photos:** add more jobs to the gallery (see the [photo guide](assets/img/photos/README.md)).
 - [ ] **Quote form (optional):** it currently opens the visitor's email app. Point it at Formspree or Netlify Forms to collect submissions directly.
 
 ## Run locally
