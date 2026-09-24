@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://stevesiron.com/sitemap.xml

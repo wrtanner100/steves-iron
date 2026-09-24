@@ -1,60 +1,55 @@
 # Steve's Iron: Website
 
-A new website for **Steve's Iron**, a mobile welding and wrought iron repair business in San Clemente, CA ([stevesiron.com](https://stevesiron.com/)).
+The new website for **Steve's Iron**: custom wrought iron and mobile welding in Dana Point, San Clemente and South Orange County.
 
-It's a fast, dependency-free static site (plain HTML, CSS and JS). There's no build step, and it hosts free on GitHub Pages, Netlify or Cloudflare Pages.
+It's a fast static site (HTML, CSS and a little JS). There are no dependencies, and it hosts free on GitHub Pages, Netlify or Cloudflare Pages.
 
-## What's on the page
+## Brand
 
-- A header with the address, email, social links, a click-to-call phone button and a "Get a Quote" button
-- A hero section with an animated welding-spark effect and trust points (C-23 license, 24/7, 25+ years, no job too small)
-- A free quote form. It checks the fields, then opens an email to `steve@stevesiron.com` with the request filled in.
-- A scrolling credentials banner
-- A swipeable services carousel with 8 services
-- A stats band, a "Why choose us" section and a 4-step process section
-- A gallery with a lightbox
-- Testimonials with a Yelp rating link
-- Service areas with a map of San Clemente, Dana Point, San Juan Capistrano, Mission Viejo, Laguna Hills, Laguna Niguel, Irvine, Newport Beach and Laguna Beach
-- An FAQ, a contact section and a footer
-- A sticky Call / Quote bar on mobile
-- SEO basics: meta tags, Open Graph tags and `LocalBusiness` structured data for Google
+- **Colors:** black, white, red `#F65257` and yellow `#FBDE44`
+- **Fonts:** Plus Jakarta Sans for headings and body, Bebas Neue for the yellow "No job too small" accents. Both are self-hosted in `assets/fonts/`.
+- **Tagline:** Quality. Commitment. Integration.
+- **Trust markers:** CA License #968768 C-23, Best of Houzz, 25+ years, 24/7 emergency, (949) 456-0176 on every page
 
-## Business info used
+## Pages
 
-| | |
+| URL | What it is |
 | --- | --- |
-| Phone | (949) 456-0176 |
-| Email | steve@stevesiron.com |
-| Address | 905 Calle Gomero, San Clemente, CA 92673 |
-| Hours | Mon–Sat 9 AM – 5 PM, emergency service 24/7 |
-| License | CA C-23 Ornamental Metals Welding Contractor #968768 |
-| Drop-off welding | $95 minimum |
+| `/` | Homepage: hero, services, previous works, about, reviews, service areas, quote form |
+| `/service-areas/` | All cities |
+| `/service-areas/dana-point/` | Dana Point page (featured first) |
+| `/service-areas/<city>/` | San Clemente, San Juan Capistrano, Laguna Niguel, Laguna Beach, Mission Viejo, Laguna Hills, Irvine, Newport Beach |
 
-## Before launch
+Each city page has its own title, description, local copy and `Service` structured data. `sitemap.xml` and `robots.txt` are included.
 
-1. **Add Steve's photos.** Put them in `assets/img/` using the file names in [`assets/img/README.md`](assets/img/README.md). Until then, each image slot shows a styled placeholder.
-2. **Check the reviews.** The two testimonials are summarized from public reviews. Replace them with real quotes (with the customer's OK).
-3. **Pick a form backend (optional).** The form opens the visitor's email app. To collect submissions without email, point the form at Formspree, Netlify Forms or similar in `assets/js/main.js`.
+## Editing content
+
+All text lives in **`src/data.js`**: business info, services, reviews and city pages. Page templates are in `src/layout.js` and `build.js`.
+
+After editing, rebuild the HTML:
+
+```bash
+node build.js
+```
+
+This needs Node 18+ and nothing else. Commit the generated `.html` files too, since those are what gets hosted.
+
+## Before showing Steve / launch checklist
+
+- [ ] **Photos:** drop his real job photos into `assets/img/photos/` (see the [photo guide](assets/img/photos/README.md)). Get them from his site's Gallery, Instagram and Houzz.
+- [ ] **Reviews:** pick his 3–4 best Google reviews and paste them word for word into `reviews` in `src/data.js`, with names. The current three are real excerpts from his public reviews, but they don't include reviewer names.
+- [ ] **Logo:** ask Steve for the original logo file. The site uses a simple black-and-white text mark until then.
+- [ ] **Best of Houzz badge:** swap the CSS badge for the official badge image from his Houzz pro account.
+- [ ] **Instagram:** add his handle as `instagramUrl` in `src/data.js`.
+- [ ] **Hours:** confirm them. His site says Mon–Sat 9–5, and some listings say Mon–Fri 8–5.
+- [ ] **Quote form (optional):** it currently opens the visitor's email app. Point it at Formspree or Netlify Forms to collect submissions directly.
 
 ## Run locally
 
 ```bash
-python3 -m http.server 8000
-# open http://localhost:8000
+python3 -m http.server 8000   # then open http://localhost:8000
 ```
 
 ## Deploy on GitHub Pages
 
-Go to Settings → Pages → Deploy from a branch, then pick the branch and `/ (root)`.
-
-## Structure
-
-```
-index.html
-assets/
-  css/styles.css    # all styles; the palette is set in :root
-  css/fonts.css     # self-hosted Barlow Condensed + Poppins
-  fonts/            # woff2 files
-  js/main.js        # nav, carousel, form, lightbox, animations, sparks
-  img/              # photos + favicon
-```
+Go to Settings → Pages → Deploy from a branch, then pick the branch and `/ (root)`. To use stevesiron.com, add a custom domain there.
