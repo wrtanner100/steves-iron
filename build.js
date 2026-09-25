@@ -16,37 +16,37 @@ const page = ({ root, path: p, title, description, jsonLd, home = false, body })
     .replace(/\{\{root\}\}/g, root);
 
 /* ------------------------------ Home ------------------------------ */
-const heroPanels = [
-  { word: b.tagline[0], photo: heroPhotos[0], alt: 'Spiral handrail by Steve’s Iron, San Clemente' },
-  { word: b.tagline[1], photo: heroPhotos[1], alt: 'Sleek slat design gate by Steve’s Iron, Dana Point' },
-  { word: b.tagline[2], photo: heroPhotos[2], alt: 'Horizontal slat fence panels by Steve’s Iron, San Clemente' },
-];
-
 const home = `
-    <section class="hero">
-      <div class="hero-panels">
-        ${heroPanels.map((h) => `<div class="hero-panel">${L.slot(h.photo, '', h.alt)}<span>${h.word.toUpperCase()}</span></div>`).join('')}
-      </div>
-      <div class="container hero-copy">
-        <div class="hero-badges">
-          <span class="pill pill-red">Licensed ${b.license}</span>
-          <span class="pill">Best of Houzz</span>
-          <span class="pill">${b.years} Years</span>
+    <section class="hero" aria-label="Intro">
+      <div class="hero-frame">
+        <div class="hero-bg photo" data-img="assets/img/hero-welder.jpg" data-fallback="assets/img/gallery/job-10.jpg" role="img" aria-label="Steve’s Iron welding and iron work"></div>
+        <div class="hero-shade" aria-hidden="true"></div>
+        <canvas class="hero-sparks" aria-hidden="true"></canvas>
+        <div class="hero-content">
+          <a class="hero-rating" href="#reviews"><span class="stars" aria-hidden="true">★★★★★</span> 100+ Google reviews &middot; Best of Houzz</a>
+          <h1 class="hero-title">
+            <span class="line"><span>Custom Wrought Iron</span></span>
+            <span class="line"><span>&amp; Mobile Welding in</span></span>
+            <span class="line"><span><em>Dana Point &amp; South OC</em></span></span>
+          </h1>
+          <p class="hero-lead">Gates, fences, railings and restoration, welded on site by a licensed pro. We come to you, 24/7.</p>
+          <div class="hero-actions">
+            <a href="${b.phoneHref}" class="btn btn-red btn-xl">${L.icons.phone} Call Now &middot; ${b.phone}</a>
+            <a href="#quote" class="btn btn-light btn-xl">Get a Free Quote</a>
+          </div>
+          <ul class="hero-trust">
+            <li>CA License #${b.license}</li>
+            <li>${b.years} years</li>
+            <li>24/7 emergency</li>
+          </ul>
         </div>
-        <h1>Custom Wrought Iron &amp; Mobile Welding in Dana Point &amp; South OC</h1>
-        <p class="hero-lead">Steve’s Iron repairs iron gates and fences and specializes in mobile welding and wrought iron restoration of residential and commercial swing gates and fences. We come to you, 24/7.</p>
-        <div class="hero-actions">
-          <a href="${b.phoneHref}" class="btn btn-red btn-xl">${L.icons.phone} Call ${b.phone}</a>
-          <a href="#quote" class="btn btn-light btn-xl">Get a Free Quote</a>
-        </div>
-        <div class="stats">
-          <div class="stat"><strong>${b.years}</strong><span>Years in business</span></div>
-          <div class="stat"><strong>100+</strong><span>5-star reviews</span></div>
-          <div class="stat"><strong>24/7</strong><span>Emergency service</span></div>
-          <div class="stat"><strong>C-23</strong><span>CA License #968768</span></div>
-        </div>
+        <a class="hero-notch" href="#reviews" aria-label="Scroll to reviews">
+          <span class="scroll-dot" aria-hidden="true"></span> Scroll
+        </a>
       </div>
     </section>
+
+    ${L.reviewsSection()}
 
     ${L.noJobBand()}
 
@@ -94,11 +94,14 @@ const home = `
             <li><strong>No job too small.</strong> One broken hinge or a full run of fence, it gets the same care.</li>
             <li><strong>Free quotes.</strong> Straight pricing up front. Bringing materials to us? Drop-off welding has a $95 minimum.</li>
           </ul>
+          <div class="stats">
+            <div class="stat"><strong data-count="25" data-suffix="+">${b.years}</strong><span>Years in business</span></div>
+            <div class="stat"><strong data-count="100" data-suffix="+">100+</strong><span>5-star reviews</span></div>
+            <div class="stat"><strong>24/7</strong><span>Emergency service</span></div>
+          </div>
         </div>
       </div>
     </section>
-
-    ${L.reviewsSection()}
 
     <section class="section areas" id="areas">
       <div class="container">

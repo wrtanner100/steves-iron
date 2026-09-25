@@ -151,6 +151,40 @@ const reviewsSection = () => `
     </div>
   </section>`;
 
+
+// CTA graphic: a wrought iron gate (arched top rail, spear-tip pickets, scroll
+// rings) with a live weld spark where a picket meets the middle rail.
+const gateArt = () => {
+  const archY = (x) => { const t = (x - 20) / 280; return 70 - 100 * t * (1 - t); };
+  const pickets = [];
+  for (let x = 50; x <= 270; x += 30) {
+    const top = archY(x) - 16;
+    pickets.push(`<path class="draw" d="M${x} 232V${top.toFixed(1)}"/><path class="draw tip" d="M${x - 5} ${(top + 6).toFixed(1)}L${x} ${(top - 8).toFixed(1)}L${x + 5} ${(top + 6).toFixed(1)}Z"/>`);
+  }
+  const rings = [];
+  for (let x = 65; x <= 255; x += 30) rings.push(`<circle class="draw" cx="${x}" cy="191" r="9"/>`);
+  const sparks = Array.from({ length: 12 }, (_, i) => {
+    const a = -170 + i * 15 + (i % 3) * 4; // mostly upward and sideways
+    return `<g transform="rotate(${a})"><line class="spark" x1="0" y1="0" x2="20" y2="0" style="--d:${(i * 0.09).toFixed(2)}s;--l:${46 + (i % 4) * 14}px"/></g>`;
+  }).join('');
+  return `<svg class="cta-art" viewBox="0 0 320 260" aria-hidden="true">
+        <defs><radialGradient id="weldGlow"><stop offset="0" stop-color="#fff" stop-opacity="1"/><stop offset=".35" stop-color="#fff5d6" stop-opacity=".8"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></radialGradient></defs>
+        <g class="gate">
+          <path class="draw" d="M20 250V40M300 250V40"/>
+          <circle class="draw" cx="20" cy="30" r="8"/><circle class="draw" cx="300" cy="30" r="8"/>
+          <path class="draw" d="M20 70Q160-30 300 70"/>
+          <path class="draw" d="M20 150H300M20 232H300"/>
+          ${pickets.join('')}
+          ${rings.join('')}
+        </g>
+        <g class="weld" transform="translate(170 150)">
+          <circle class="weld-glow" r="30" fill="url(#weldGlow)"/>
+          <circle class="weld-core" r="4"/>
+          ${sparks}
+        </g>
+      </svg>`;
+};
+
 const ctaBand = (city) => `
   <section class="cta-band">
     <div class="container cta-inner">
@@ -159,7 +193,7 @@ const ctaBand = (city) => `
         <a href="${b.phoneHref}" class="btn btn-black btn-lg">${icons.phone} Call ${b.phone}</a>
         <a href="#quote" class="btn btn-white btn-lg">Get a Free Quote</a>
       </div>
-      <svg class="cta-art" viewBox="0 0 200 240" aria-hidden="true"><path d="M100 20c-40 0-46 50-12 56 22 4 24-22 6-22M100 20c40 0 46 50 12 56M100 76v88M100 220c-40 0-46-50-12-56 22-4 24 22 6 22M100 220c40 0 46-50 12-56"/></svg>
+      ${gateArt()}
     </div>
   </section>`;
 

@@ -31,15 +31,114 @@
   }, { rootMargin: '-45% 0px -50% 0px' });
   navLinks.map((a) => document.getElementById(a.getAttribute('href').slice(1))).filter(Boolean).forEach((s) => spy.observe(s));
 
-  /* ---------- Photo slots: use Steve's photo if the file exists, else keep the iron pattern ---------- */
-  $$('[data-img]').forEach((el) => {
+  /* ---------- Photo slots: try data-img, then data-fallback; else keep the iron pattern ---------- */
+  const loadInto = (el, sources) => {
+    if (!sources.length) return;
     const img = new Image();
     img.onload = () => {
       el.style.setProperty('--photo', `url("${img.src}")`);
       el.classList.add('has-img');
+      el.dataset.loaded = sources[0];
     };
-    img.src = el.dataset.img;
-  });
+    img.onerror = () => loadInto(el, sources.slice(1));
+    img.src = sources[0];
+  };
+  $$('[data-img]').forEach((el) => loadInto(el, [el.dataset.img, el.dataset.fallback].filter(Boolean)));
+
+  /* ---------- Hero: intro animation, parallax, welding sparks ---------- */
+  const hero = $('.hero');
+  if (hero && $('.hero-frame', hero)) {
+    requestAnimationFrame(() => requestAnimationFrame(() => hero.classList.add('ready')));
+    const bg = $('.hero-bg', hero);
+    if (!reduceMotion) {
+      let ticking = false;
+      window.addEventListener('scroll', () => {
+        if (ticking) return;
+        ticking = true;
+        requestAnimationFrame(() => {
+          const y = Math.min(window.scrollY, window.innerHeight);
+          bg.style.setProperty('--parallax', `${y * 0.18}px`);
+          ticking = false;
+        });
+      }, { passive: true });
+    }
+
+    const canvas = $('.hero-sparks', hero);
+    if (canvas && !reduceMotion) {
+      const ctx = canvas.getContext('2d');
+      const frame = $('.hero-frame', hero);
+      let w = 0, h = 0, sparks = [], running = true;
+      const origin = () => (w > 900 ? { x: w * 0.64, y: h * 0.72 } : { x: w * 0.78, y: h * 0.22 });
+      const resize = () => {
+        const dpr = Math.min(window.devicePixelRatio || 1, 2);
+        w = frame.clientWidth; h = frame.clientHeight;
+        canvas.width = w * dpr; canvas.height = h * dpr;
+        ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      };
+      resize();
+      window.addEventListener('resize', resize);
+      const tick = () => {
+        if (!running) return;
+        ctx.clearRect(0, 0, w, h);
+        const o = origin();
+        const n = Math.random() < 0.08 ? 10 : 2;
+        for (let i = 0; i < n; i++) {
+          const a = -Math.PI / 2 + (Math.random() - 0.5) * Math.PI * 1.4;
+          const v = 1.5 + Math.random() * 4.5;
+          sparks.push({ x: o.x, y: o.y, vx: Math.cos(a) * v, vy: Math.sin(a) * v, life: 1, decay: 0.012 + Math.random() * 0.02 });
+        }
+        ctx.globalCompositeOperation = 'lighter';
+        sparks = sparks.filter((p) => p.life > 0);
+        for (const p of sparks) {
+          const px = p.x, py = p.y;
+          p.vy += 0.12; p.x += p.vx; p.y += p.vy; p.life -= p.decay;
+          ctx.strokeStyle = `rgba(255, ${190 + Math.floor(p.life * 60)}, ${120 + Math.floor(p.life * 100)}, ${p.life * 0.9})`;
+          ctx.lineWidth = 1.4 * p.life + 0.3;
+          ctx.beginPath(); ctx.moveTo(px, py); ctx.lineTo(p.x, p.y); ctx.stroke();
+        }
+        ctx.globalCompositeOperation = 'source-over';
+        requestAnimationFrame(tick);
+      };
+      new IntersectionObserver(([e]) => {
+        const was = running; running = e.isIntersecting;
+        if (running && !was) requestAnimationFrame(tick);
+      }).observe(frame);
+      requestAnimationFrame(tick);
+    }
+  }
+
+  /* ---------- CTA gate graphic draws itself in when scrolled into view ---------- */
+  const ctas = $$('.cta-band');
+  if ('IntersectionObserver' in window) {
+    const co = new IntersectionObserver((entries) => entries.forEach((e) => {
+      if (e.isIntersecting) { e.target.classList.add('in'); co.unobserve(e.target); }
+    }), { threshold: 0.35 });
+    ctas.forEach((c) => co.observe(c));
+  } else ctas.forEach((c) => c.classList.add('in'));
+
+  /* ---------- Cursor glow on cards ---------- */
+  $$('.service, .review').forEach((card) => card.addEventListener('pointermove', (e) => {
+    const r = card.getBoundingClientRect();
+    card.style.setProperty('--mx', `${e.clientX - r.left}px`);
+    card.style.setProperty('--my', `${e.clientY - r.top}px`);
+  }));
+
+  /* ---------- Count-up stats ---------- */
+  const counters = $$('[data-count]');
+  if (!reduceMotion && counters.length) {
+    const cio = new IntersectionObserver((entries) => entries.forEach((entry) => {
+      if (!entry.isIntersecting) return;
+      const el = entry.target, end = Number(el.dataset.count), suffix = el.dataset.suffix || '', t0 = performance.now();
+      const step = (now) => {
+        const t = Math.min((now - t0) / 1400, 1);
+        el.textContent = Math.round(end * (1 - Math.pow(1 - t, 3))) + suffix;
+        if (t < 1) requestAnimationFrame(step);
+      };
+      requestAnimationFrame(step);
+      cio.unobserve(el);
+    }), { threshold: 0.6 });
+    counters.forEach((el) => cio.observe(el));
+  }
 
   /* ---------- Gallery: filters + lightbox ---------- */
   const items = $$('.g-item');

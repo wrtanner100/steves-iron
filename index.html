@@ -43,30 +43,79 @@
     </div>
   </header>
   <main id="main">
-    <section class="hero">
-      <div class="hero-panels">
-        <div class="hero-panel"><div class="photo " data-img="assets/img/gallery/job-11.jpg" role="img" aria-label="Spiral handrail by Steve’s Iron, San Clemente"></div><span>QUALITY.</span></div><div class="hero-panel"><div class="photo " data-img="assets/img/gallery/job-10.jpg" role="img" aria-label="Sleek slat design gate by Steve’s Iron, Dana Point"></div><span>COMMITMENT.</span></div><div class="hero-panel"><div class="photo " data-img="assets/img/gallery/job-02.jpg" role="img" aria-label="Horizontal slat fence panels by Steve’s Iron, San Clemente"></div><span>INTEGRATION.</span></div>
-      </div>
-      <div class="container hero-copy">
-        <div class="hero-badges">
-          <span class="pill pill-red">Licensed 968768 C-23</span>
-          <span class="pill">Best of Houzz</span>
-          <span class="pill">25+ Years</span>
+    <section class="hero" aria-label="Intro">
+      <div class="hero-frame">
+        <div class="hero-bg photo" data-img="assets/img/hero-welder.jpg" data-fallback="assets/img/gallery/job-10.jpg" role="img" aria-label="Steve’s Iron welding and iron work"></div>
+        <div class="hero-shade" aria-hidden="true"></div>
+        <canvas class="hero-sparks" aria-hidden="true"></canvas>
+        <div class="hero-content">
+          <a class="hero-rating" href="#reviews"><span class="stars" aria-hidden="true">★★★★★</span> 100+ Google reviews &middot; Best of Houzz</a>
+          <h1 class="hero-title">
+            <span class="line"><span>Custom Wrought Iron</span></span>
+            <span class="line"><span>&amp; Mobile Welding in</span></span>
+            <span class="line"><span><em>Dana Point &amp; South OC</em></span></span>
+          </h1>
+          <p class="hero-lead">Gates, fences, railings and restoration, welded on site by a licensed pro. We come to you, 24/7.</p>
+          <div class="hero-actions">
+            <a href="tel:+19494560176" class="btn btn-red btn-xl"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8 9.8a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.7 2z"/></svg> Call Now &middot; (949) 456-0176</a>
+            <a href="#quote" class="btn btn-light btn-xl">Get a Free Quote</a>
+          </div>
+          <ul class="hero-trust">
+            <li>CA License #968768 C-23</li>
+            <li>25+ years</li>
+            <li>24/7 emergency</li>
+          </ul>
         </div>
-        <h1>Custom Wrought Iron &amp; Mobile Welding in Dana Point &amp; South OC</h1>
-        <p class="hero-lead">Steve’s Iron repairs iron gates and fences and specializes in mobile welding and wrought iron restoration of residential and commercial swing gates and fences. We come to you, 24/7.</p>
-        <div class="hero-actions">
-          <a href="tel:+19494560176" class="btn btn-red btn-xl"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8 9.8a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.7 2z"/></svg> Call (949) 456-0176</a>
-          <a href="#quote" class="btn btn-light btn-xl">Get a Free Quote</a>
-        </div>
-        <div class="stats">
-          <div class="stat"><strong>25+</strong><span>Years in business</span></div>
-          <div class="stat"><strong>100+</strong><span>5-star reviews</span></div>
-          <div class="stat"><strong>24/7</strong><span>Emergency service</span></div>
-          <div class="stat"><strong>C-23</strong><span>CA License #968768</span></div>
-        </div>
+        <a class="hero-notch" href="#reviews" aria-label="Scroll to reviews">
+          <span class="scroll-dot" aria-hidden="true"></span> Scroll
+        </a>
       </div>
     </section>
+
+    
+  <section class="section reviews" id="reviews">
+    <div class="container">
+      <div class="section-title">
+        <span class="title-mark" aria-hidden="true"><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M4 6h10v10H8a4 4 0 0 0 4 4v4a8 8 0 0 1-8-8V6zm14 0h10v10h-6a4 4 0 0 0 4 4v4a8 8 0 0 1-8-8V6z" fill="currentColor" stroke="none"/></svg></span>
+        <h2>What People Say About Steve</h2>
+        <span class="title-mark" aria-hidden="true"><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M4 6h10v10H8a4 4 0 0 0 4 4v4a8 8 0 0 1-8-8V6zm14 0h10v10h-6a4 4 0 0 0 4 4v4a8 8 0 0 1-8-8V6z" fill="currentColor" stroke="none"/></svg></span>
+      </div>
+      <div class="rating-summary">
+        <span class="stars" aria-hidden="true">★★★★★</span>
+        <span><strong>5-star rated</strong> &middot; 100+ reviews from South County homeowners &amp; businesses</span>
+      </div>
+      <div class="review-grid">
+        
+        <figure class="review">
+          <span class="stars" aria-label="5 out of 5 stars">★★★★★</span>
+          <blockquote>“Extremely pleased with Steve’s work. I highly recommend him and his team.”</blockquote>
+          <figcaption>
+            <span class="avatar" aria-hidden="true">C</span>
+            <span><strong>Charles</strong><small>Google review</small></span>
+          </figcaption>
+        </figure>
+        <figure class="review">
+          <span class="stars" aria-label="5 out of 5 stars">★★★★★</span>
+          <blockquote>“Steve was easy to work with and great with communication.”</blockquote>
+          <figcaption>
+            <span class="avatar" aria-hidden="true">N</span>
+            <span><strong>Nicholas</strong><small>Google review</small></span>
+          </figcaption>
+        </figure>
+        <figure class="review">
+          <span class="stars" aria-label="5 out of 5 stars">★★★★★</span>
+          <blockquote>“Steve was great, he was prompt, polite and we now have a beautiful wrought iron gate!”</blockquote>
+          <figcaption>
+            <span class="avatar" aria-hidden="true">K</span>
+            <span><strong>Karen</strong><small>Google review</small></span>
+          </figcaption>
+        </figure>
+      </div>
+      <div class="center-actions">
+        <a href="https://www.google.com/search?q=Steve%27s+Iron+San+Clemente+reviews" target="_blank" rel="noopener" class="btn btn-outline-light">Read all 100+ reviews <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+      </div>
+    </div>
+  </section>
 
     
   <section class="band" aria-label="No job too small, 24/7 emergency service, Licensed 968768 C-23, Free quotes, We come to you">
@@ -172,54 +221,14 @@
             <li><strong>No job too small.</strong> One broken hinge or a full run of fence, it gets the same care.</li>
             <li><strong>Free quotes.</strong> Straight pricing up front. Bringing materials to us? Drop-off welding has a $95 minimum.</li>
           </ul>
+          <div class="stats">
+            <div class="stat"><strong data-count="25" data-suffix="+">25+</strong><span>Years in business</span></div>
+            <div class="stat"><strong data-count="100" data-suffix="+">100+</strong><span>5-star reviews</span></div>
+            <div class="stat"><strong>24/7</strong><span>Emergency service</span></div>
+          </div>
         </div>
       </div>
     </section>
-
-    
-  <section class="section reviews" id="reviews">
-    <div class="container">
-      <div class="section-title">
-        <span class="title-mark" aria-hidden="true"><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M4 6h10v10H8a4 4 0 0 0 4 4v4a8 8 0 0 1-8-8V6zm14 0h10v10h-6a4 4 0 0 0 4 4v4a8 8 0 0 1-8-8V6z" fill="currentColor" stroke="none"/></svg></span>
-        <h2>What People Say About Steve</h2>
-        <span class="title-mark" aria-hidden="true"><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M4 6h10v10H8a4 4 0 0 0 4 4v4a8 8 0 0 1-8-8V6zm14 0h10v10h-6a4 4 0 0 0 4 4v4a8 8 0 0 1-8-8V6z" fill="currentColor" stroke="none"/></svg></span>
-      </div>
-      <div class="rating-summary">
-        <span class="stars" aria-hidden="true">★★★★★</span>
-        <span><strong>5-star rated</strong> &middot; 100+ reviews from South County homeowners &amp; businesses</span>
-      </div>
-      <div class="review-grid">
-        
-        <figure class="review">
-          <span class="stars" aria-label="5 out of 5 stars">★★★★★</span>
-          <blockquote>“Extremely pleased with Steve’s work. I highly recommend him and his team.”</blockquote>
-          <figcaption>
-            <span class="avatar" aria-hidden="true">C</span>
-            <span><strong>Charles</strong><small>Google review</small></span>
-          </figcaption>
-        </figure>
-        <figure class="review">
-          <span class="stars" aria-label="5 out of 5 stars">★★★★★</span>
-          <blockquote>“Steve was easy to work with and great with communication.”</blockquote>
-          <figcaption>
-            <span class="avatar" aria-hidden="true">N</span>
-            <span><strong>Nicholas</strong><small>Google review</small></span>
-          </figcaption>
-        </figure>
-        <figure class="review">
-          <span class="stars" aria-label="5 out of 5 stars">★★★★★</span>
-          <blockquote>“Steve was great, he was prompt, polite and we now have a beautiful wrought iron gate!”</blockquote>
-          <figcaption>
-            <span class="avatar" aria-hidden="true">K</span>
-            <span><strong>Karen</strong><small>Google review</small></span>
-          </figcaption>
-        </figure>
-      </div>
-      <div class="center-actions">
-        <a href="https://www.google.com/search?q=Steve%27s+Iron+San+Clemente+reviews" target="_blank" rel="noopener" class="btn btn-outline-light">Read all 100+ reviews <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
-      </div>
-    </div>
-  </section>
 
     <section class="section areas" id="areas">
       <div class="container">
@@ -286,7 +295,22 @@
         <a href="tel:+19494560176" class="btn btn-black btn-lg"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8 9.8a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.7 2z"/></svg> Call (949) 456-0176</a>
         <a href="#quote" class="btn btn-white btn-lg">Get a Free Quote</a>
       </div>
-      <svg class="cta-art" viewBox="0 0 200 240" aria-hidden="true"><path d="M100 20c-40 0-46 50-12 56 22 4 24-22 6-22M100 20c40 0 46 50 12 56M100 76v88M100 220c-40 0-46-50-12-56 22-4 24 22 6 22M100 220c40 0 46-50 12-56"/></svg>
+      <svg class="cta-art" viewBox="0 0 320 260" aria-hidden="true">
+        <defs><radialGradient id="weldGlow"><stop offset="0" stop-color="#fff" stop-opacity="1"/><stop offset=".35" stop-color="#fff5d6" stop-opacity=".8"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></radialGradient></defs>
+        <g class="gate">
+          <path class="draw" d="M20 250V40M300 250V40"/>
+          <circle class="draw" cx="20" cy="30" r="8"/><circle class="draw" cx="300" cy="30" r="8"/>
+          <path class="draw" d="M20 70Q160-30 300 70"/>
+          <path class="draw" d="M20 150H300M20 232H300"/>
+          <path class="draw" d="M50 232V44.4"/><path class="draw tip" d="M45 50.4L50 36.4L55 50.4Z"/><path class="draw" d="M80 232V37.2"/><path class="draw tip" d="M75 43.2L80 29.2L85 43.2Z"/><path class="draw" d="M110 232V32.2"/><path class="draw tip" d="M105 38.2L110 24.2L115 38.2Z"/><path class="draw" d="M140 232V29.5"/><path class="draw tip" d="M135 35.5L140 21.5L145 35.5Z"/><path class="draw" d="M170 232V29.1"/><path class="draw tip" d="M165 35.1L170 21.1L175 35.1Z"/><path class="draw" d="M200 232V31.0"/><path class="draw tip" d="M195 37.0L200 23.0L205 37.0Z"/><path class="draw" d="M230 232V35.3"/><path class="draw tip" d="M225 41.3L230 27.3L235 41.3Z"/><path class="draw" d="M260 232V41.8"/><path class="draw tip" d="M255 47.8L260 33.8L265 47.8Z"/>
+          <circle class="draw" cx="65" cy="191" r="9"/><circle class="draw" cx="95" cy="191" r="9"/><circle class="draw" cx="125" cy="191" r="9"/><circle class="draw" cx="155" cy="191" r="9"/><circle class="draw" cx="185" cy="191" r="9"/><circle class="draw" cx="215" cy="191" r="9"/><circle class="draw" cx="245" cy="191" r="9"/>
+        </g>
+        <g class="weld" transform="translate(170 150)">
+          <circle class="weld-glow" r="30" fill="url(#weldGlow)"/>
+          <circle class="weld-core" r="4"/>
+          <g transform="rotate(-170)"><line class="spark" x1="0" y1="0" x2="20" y2="0" style="--d:0.00s;--l:46px"/></g><g transform="rotate(-151)"><line class="spark" x1="0" y1="0" x2="20" y2="0" style="--d:0.09s;--l:60px"/></g><g transform="rotate(-132)"><line class="spark" x1="0" y1="0" x2="20" y2="0" style="--d:0.18s;--l:74px"/></g><g transform="rotate(-125)"><line class="spark" x1="0" y1="0" x2="20" y2="0" style="--d:0.27s;--l:88px"/></g><g transform="rotate(-106)"><line class="spark" x1="0" y1="0" x2="20" y2="0" style="--d:0.36s;--l:46px"/></g><g transform="rotate(-87)"><line class="spark" x1="0" y1="0" x2="20" y2="0" style="--d:0.45s;--l:60px"/></g><g transform="rotate(-80)"><line class="spark" x1="0" y1="0" x2="20" y2="0" style="--d:0.54s;--l:74px"/></g><g transform="rotate(-61)"><line class="spark" x1="0" y1="0" x2="20" y2="0" style="--d:0.63s;--l:88px"/></g><g transform="rotate(-42)"><line class="spark" x1="0" y1="0" x2="20" y2="0" style="--d:0.72s;--l:46px"/></g><g transform="rotate(-35)"><line class="spark" x1="0" y1="0" x2="20" y2="0" style="--d:0.81s;--l:60px"/></g><g transform="rotate(-16)"><line class="spark" x1="0" y1="0" x2="20" y2="0" style="--d:0.90s;--l:74px"/></g><g transform="rotate(3)"><line class="spark" x1="0" y1="0" x2="20" y2="0" style="--d:0.99s;--l:88px"/></g>
+        </g>
+      </svg>
     </div>
   </section>
     
