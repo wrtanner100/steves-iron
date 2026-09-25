@@ -45,7 +45,7 @@
   };
   $$('[data-img]').forEach((el) => loadInto(el, [el.dataset.img, el.dataset.fallback].filter(Boolean)));
 
-  /* ---------- Hero: intro animation, parallax, welding sparks ---------- */
+  /* ---------- Hero: intro animation, parallax ---------- */
   const hero = $('.hero');
   if (hero && $('.hero-frame', hero)) {
     requestAnimationFrame(() => requestAnimationFrame(() => hero.classList.add('ready')));
@@ -61,49 +61,6 @@
           ticking = false;
         });
       }, { passive: true });
-    }
-
-    const canvas = $('.hero-sparks', hero);
-    if (canvas && !reduceMotion) {
-      const ctx = canvas.getContext('2d');
-      const frame = $('.hero-frame', hero);
-      let w = 0, h = 0, sparks = [], running = true;
-      const origin = () => (w > 900 ? { x: w * 0.64, y: h * 0.72 } : { x: w * 0.78, y: h * 0.22 });
-      const resize = () => {
-        const dpr = Math.min(window.devicePixelRatio || 1, 2);
-        w = frame.clientWidth; h = frame.clientHeight;
-        canvas.width = w * dpr; canvas.height = h * dpr;
-        ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-      };
-      resize();
-      window.addEventListener('resize', resize);
-      const tick = () => {
-        if (!running) return;
-        ctx.clearRect(0, 0, w, h);
-        const o = origin();
-        const n = Math.random() < 0.08 ? 10 : 2;
-        for (let i = 0; i < n; i++) {
-          const a = -Math.PI / 2 + (Math.random() - 0.5) * Math.PI * 1.4;
-          const v = 1.5 + Math.random() * 4.5;
-          sparks.push({ x: o.x, y: o.y, vx: Math.cos(a) * v, vy: Math.sin(a) * v, life: 1, decay: 0.012 + Math.random() * 0.02 });
-        }
-        ctx.globalCompositeOperation = 'lighter';
-        sparks = sparks.filter((p) => p.life > 0);
-        for (const p of sparks) {
-          const px = p.x, py = p.y;
-          p.vy += 0.12; p.x += p.vx; p.y += p.vy; p.life -= p.decay;
-          ctx.strokeStyle = `rgba(255, ${190 + Math.floor(p.life * 60)}, ${120 + Math.floor(p.life * 100)}, ${p.life * 0.9})`;
-          ctx.lineWidth = 1.4 * p.life + 0.3;
-          ctx.beginPath(); ctx.moveTo(px, py); ctx.lineTo(p.x, p.y); ctx.stroke();
-        }
-        ctx.globalCompositeOperation = 'source-over';
-        requestAnimationFrame(tick);
-      };
-      new IntersectionObserver(([e]) => {
-        const was = running; running = e.isIntersecting;
-        if (running && !was) requestAnimationFrame(tick);
-      }).observe(frame);
-      requestAnimationFrame(tick);
     }
   }
 

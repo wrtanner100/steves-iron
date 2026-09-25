@@ -38,7 +38,6 @@ This needs Node 18+ and nothing else. Commit the generated `.html` files too, si
 
 ## Still to do
 
-- [ ] **Hero photo:** save the welder photo as `assets/img/hero-welder.jpg` (about 1920px wide, under 400 KB). The homepage uses it automatically. Until then the hero shows a gallery photo. If it's a stock photo, make sure the license covers use on Steve's site.
 - [ ] **Logo:** ask Steve for the original logo file. The current one is upscaled from the small JPG on his site. Replace `logo-white.png` and `logo-black.png`.
 - [ ] **Best of Houzz badge:** swap the CSS badge for the official badge image from his Houzz pro account.
 - [ ] **Instagram:** add his handle as `instagramUrl` in `src/data.js`.

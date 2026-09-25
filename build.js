@@ -21,7 +21,6 @@ const home = `
       <div class="hero-frame">
         <div class="hero-bg photo" data-img="assets/img/hero-welder.jpg" data-fallback="assets/img/gallery/job-10.jpg" role="img" aria-label="Steve’s Iron welding and iron work"></div>
         <div class="hero-shade" aria-hidden="true"></div>
-        <canvas class="hero-sparks" aria-hidden="true"></canvas>
         <div class="hero-content">
           <a class="hero-rating" href="#reviews"><span class="stars" aria-hidden="true">★★★★★</span> 100+ Google reviews &middot; Best of Houzz</a>
           <h1 class="hero-title">
